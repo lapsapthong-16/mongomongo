@@ -1,3 +1,4 @@
+# Author: Edwina Hon Kai Xin
 
 class sentiment_insertion:
     def __init__(self, collection):

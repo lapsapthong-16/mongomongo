@@ -1,3 +1,5 @@
+# Author: Edwina Hon Kai Xin
+
 from pymongo import MongoClient
 
 # Replace with your connection string and password

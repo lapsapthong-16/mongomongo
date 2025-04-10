@@ -1,3 +1,5 @@
+# Author: Edwina Hon Kai Xin
+
 class sentiment_query:
     def __init__(self, collection):
         self.collection = collection

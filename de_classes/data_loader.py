@@ -1,3 +1,5 @@
+# Author: Edwina Hon Kai Xin
+
 class data_loader:
     @staticmethod
     def from_json_lines(file_path):
