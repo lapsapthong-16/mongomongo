@@ -1,15 +1,29 @@
-
 class sentiment_query:
     def __init__(self, collection):
         self.collection = collection
 
-    def get_sentiment_distribution(self):
-        return list(self.collection.aggregate([
-            {"$group": {"_id": "$sentiment", "count": {"$sum": 1}}}
-        ]))
+    def find_by_sentiment(self, sentiment):
+        return list(self.collection.find({"sentiment": sentiment}))
 
-    def get_top_negative_influencers(self, limit=5):
-        return list(self.collection.find({"sentiment": "Negative"}).sort("followers_count", -1).limit(limit))
+    def find_by_prediction(self, prediction_value):
+        return list(self.collection.find({"prediction": prediction_value}))
 
-    def get_tweets_by_user(self, user_id):
-        return list(self.collection.find({"user_id": user_id}))
+    def find_by_source(self, source_name):
+        return list(self.collection.find({"name": source_name}))
+
+    def search_tweets(self, keyword):
+        return list(self.collection.find({"Tweet": {"$regex": keyword, "$options": "i"}}))
+
+    def count_by_sentiment(self):
+        pipeline = [
+            {"$group": {"_id": "$sentiment", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}}
+        ]
+        return list(self.collection.aggregate(pipeline))
+
+    def count_by_source(self):
+        pipeline = [
+            {"$group": {"_id": "$name", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}}
+        ]
+        return list(self.collection.aggregate(pipeline))
