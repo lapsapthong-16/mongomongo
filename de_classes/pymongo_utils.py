@@ -5,8 +5,6 @@ from pymongo import MongoClient
 # Replace with your connection string and password
 CONNECTION_STRING =  "mongodb+srv://lapsap:hankaixin@cluster0.lfs6gtg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-from pymongo import MongoClient
-
 class PyMongoUtils:
     def __init__(self, uri=CONNECTION_STRING):
         self.client = MongoClient(uri)
