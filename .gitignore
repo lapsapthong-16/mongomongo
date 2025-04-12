@@ -24,3 +24,6 @@ venv/
 # Requirements lock (optional, only if you don't want to track env locks)
 poetry.lock
 Pipfile.lock
+
+# Environment variables
+.env

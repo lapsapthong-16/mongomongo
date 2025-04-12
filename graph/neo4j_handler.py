@@ -1,13 +1,10 @@
 # Author: Edwina Hon Kai Xin
 
 from neo4j import GraphDatabase
-
-CONNECTION_STRING = "neo4j+s://2f87e004.databases.neo4j.io"
-USER = "neo4j"
-PASSWORD = "g-c66iZIlb7VPDfb0c6Z6yAYEgbh2OXOytSReU7gqIk"
+import os
             
 class Neo4jHandler:
-    def __init__(self, uri = CONNECTION_STRING, user = USER, password = PASSWORD):
+    def __init__(self, uri = os.getenv("NEO4J_URI"), user = os.getenv("NEO4J_USER"), password = os.getenv("NEO4J_PASSWORD")):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
     def close(self):
@@ -15,7 +12,7 @@ class Neo4jHandler:
 
     def insert_tweet_graph(self, tweet_text, sentiment, source, entities):
         with self.driver.session() as session:
-            session.write_transaction(
+            session.execute_write(
                 self._create_graph, tweet_text, sentiment, source, entities
             )
 

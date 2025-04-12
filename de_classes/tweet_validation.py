@@ -30,13 +30,7 @@ class TweetValidator:
         return True
 
     def filter_valid(self, data: list) -> list:
-        """
-        Filters a list of tweets and returns only the valid ones.
-        """
         return [tweet for tweet in data if self.is_valid(tweet)]
 
     def report_invalid(self, data: list) -> list:
-        """
-        Returns a list of invalid tweets for review or logging.
-        """
         return [tweet for tweet in data if not self.is_valid(tweet)]
