@@ -4,7 +4,7 @@ from pyspark.ml import Pipeline
 from pyspark.ml.classification import NaiveBayes, LogisticRegression, RandomForestClassifier, DecisionTreeClassifier
 from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-from classes.TextPreprocessor import TextPreprocessor  # Import TextPreprocessor
+from preprocess.TextPreprocessor import TextPreprocessor  # Import TextPreprocessor
 
 class SentimentModelTrainer:
     def __init__(self, label_col="label", feature_col="features"):

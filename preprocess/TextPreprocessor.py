@@ -1,8 +1,8 @@
 # Author: WEE LING HUE
 
-from classes.TextCleaner import TextCleaner  # Import TextCleaner
-from classes.Lemmatizer import Lemmatizer  # Import Lemmatizer
-from classes.MalayStemmer import MalayStemmer  # Import MalayStemmer
+from preprocess.TextCleaner import TextCleaner  # Import TextCleaner
+from preprocess.Lemmatizer import Lemmatizer  # Import Lemmatizer
+from preprocess.MalayStemmer import MalayStemmer  # Import MalayStemmer
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import Tokenizer, StopWordsRemover, HashingTF, IDF, StringIndexer
 from pyspark.sql.functions import udf, col
