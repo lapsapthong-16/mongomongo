@@ -1,0 +1,26 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python virtual environment
+.venv/
+env/
+ENV/
+venv/
+
+# VSCode settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Logs (optional)
+*.log
+
+# Requirements lock (optional, only if you don't want to track env locks)
+poetry.lock
+Pipfile.lock

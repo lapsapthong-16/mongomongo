@@ -29,3 +29,13 @@ class sentiment_query:
             {"$sort": {"count": -1}}
         ]
         return list(self.collection.aggregate(pipeline))
+
+    def count_by_sentiment_and_source(self):
+        pipeline = [
+            {"$group": {
+                "_id": {"sentiment": "$sentiment", "source": "$name"},
+                "count": {"$sum": 1}
+            }},
+            {"$sort": {"count": -1}}
+        ]
+        return list(self.collection.aggregate(pipeline))
