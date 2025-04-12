@@ -1,5 +1,11 @@
 # Class to extract people, topics, orgs, locations
+
 import spacy
+nlp = spacy.load("en_core_web_sm")
+
+# Importing as module.
+import en_core_web_sm
+nlp = en_core_web_sm.load()
 
 class EntityExtractor:
     def __init__(self):

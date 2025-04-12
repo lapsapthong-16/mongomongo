@@ -1,15 +1,13 @@
 # Author: Edwina Hon Kai Xin
-# Class to connect to Neo4j and insert nodes/edges
+
 from neo4j import GraphDatabase
 
 CONNECTION_STRING = "neo4j+s://2f87e004.databases.neo4j.io"
 USER = "neo4j"
 PASSWORD = "g-c66iZIlb7VPDfb0c6Z6yAYEgbh2OXOytSReU7gqIk"
-
-from neo4j import GraphDatabase
-
+            
 class Neo4jHandler:
-    def __init__(self, uri, user, password):
+    def __init__(self, uri = CONNECTION_STRING, user = USER, password = PASSWORD):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
     def close(self):
