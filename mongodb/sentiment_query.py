@@ -1,5 +1,5 @@
 # Author: Edwina Hon Kai Xin
-
+from datetime import datetime
 class sentiment_query:
     def __init__(self, collection):
         self.collection = collection
@@ -47,18 +47,26 @@ class sentiment_query:
 
     # Tweets within a date range (based on ISO date string in "Time")
     def find_by_date_range(self, start_date, end_date):
-        return list(self.collection.find({
-            "Time": {"$gte": start_date, "$lte": end_date}
-        }))
+        # Convert input strings to datetime objects
+        start_dt = datetime.strptime(start_date, "%Y-%m-%d")
+        end_dt = datetime.strptime(end_date, "%Y-%m-%d")
 
-    # Top N sources by tweet count
-    def top_sources(self, n=5):
-        pipeline = [
-            {"$group": {"_id": "$name", "count": {"$sum": 1}}},
-            {"$sort": {"count": -1}},
-            {"$limit": n}
-        ]
-        return list(self.collection.aggregate(pipeline))
+        # Fetch all tweets
+        all_docs = list(self.collection.find({"Time": {"$exists": True}}))
+
+        # Filter in Python
+        result = []
+        for doc in all_docs:
+            try:
+                tweet_time = datetime.strptime(doc["Time"], "%a %b %d %H:%M:%S %z %Y")
+                # Remove tzinfo for comparison with naive start/end_dt
+                tweet_time_naive = tweet_time.replace(tzinfo=None)
+                if start_dt <= tweet_time_naive <= end_dt:
+                    result.append(doc)
+            except Exception as e:
+                print(f"Failed to parse date for document: {doc.get('Time')}, Error: {e}")
+
+        return result
 
     # Sentiment distribution over time
     def sentiment_over_time(self):
