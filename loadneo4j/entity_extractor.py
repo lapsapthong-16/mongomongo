@@ -12,7 +12,7 @@ class EntityExtractor:
         self.nlp = spacy.load("en_core_web_sm")  # Use a small, efficient model
 
     def extract_entities(self, text):
-        doc = self.nlp(text)
+        doc = self.nlp(text) 
         people = set()
         orgs = set()
         locations = set()
