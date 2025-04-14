@@ -27,7 +27,7 @@ class Neo4jHandler:
         MERGE (t)-[:HAS_SENTIMENT]->(sent)
 
         MERGE (s:Source {name: $source})
-        MERGE (t)-[:PUBLISHED_BY]->(s)
+        MERGE (s)-[:PUBLISHED]->(t)
 
         FOREACH (topic IN $topics |
             MERGE (tp:Topic {name: topic})
