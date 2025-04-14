@@ -21,8 +21,10 @@ class Neo4jHandler:
     def _create_graph(tx, tweet_text, sentiment, source, time, entities):
         query = """
         MERGE (t:Tweet {text: $tweet_text})
-        SET t.sentiment = $sentiment,
-            t.time = $time
+        SET t.time = $time
+
+        MERGE (sent:Sentiment {label: $sentiment})
+        MERGE (t)-[:HAS_SENTIMENT]->(sent)
 
         MERGE (s:Source {name: $source})
         MERGE (t)-[:PUBLISHED_BY]->(s)
