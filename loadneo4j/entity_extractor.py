@@ -1,36 +1,37 @@
-# Class to extract people, topics, orgs, locations
-
-import spacy
-nlp = spacy.load("en_core_web_sm")
-
-# Importing as module.
-import en_core_web_sm
-nlp = en_core_web_sm.load()
+from transformers import pipeline
 
 class EntityExtractor:
-    def __init__(self):
-        self.nlp = spacy.load("en_core_web_sm")  # Use a small, efficient model
+    def __init__(self, model_name="dslim/bert-base-NER"):
+        self.ner_pipeline = pipeline("ner", model=model_name, grouped_entities=True)
 
     def extract_entities(self, text):
-        doc = self.nlp(text) 
+        ner_results = self.ner_pipeline(text)
+        
         people = set()
         orgs = set()
         locations = set()
         topics = set()
 
-        for ent in doc.ents:
-            if ent.label_ == "PERSON":
-                people.add(ent.text)
-            elif ent.label_ == "ORG":
-                orgs.add(ent.text)
-            elif ent.label_ in ["GPE", "LOC"]:
-                locations.add(ent.text)
-            elif ent.label_ in ["EVENT", "NORP", "WORK_OF_ART"]:
-                topics.add(ent.text)
+        for entity in ner_results:
+            label = entity['entity_group']
+            word = entity['word']
 
-        return {
+            if label == "PER":
+                people.add(word)
+            elif label == "ORG":
+                orgs.add(word)
+            elif label == "LOC":
+                locations.add(word)
+            elif label in ["MISC"]:
+                topics.add(word)
+
+        result = {
             "people": list(people),
             "organizations": list(orgs),
             "locations": list(locations),
             "topics": list(topics)
         }
+
+        print(f"Text: {text}")
+        print(f"Extracted Entities: {result}")
+        return result
