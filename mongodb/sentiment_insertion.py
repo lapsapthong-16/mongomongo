@@ -33,7 +33,7 @@ class sentiment_insertion:
         for tweet in data:
             normalized_tweet = {}
             for key, value in tweet.items():
-                # Convert keys like 'Tweet' to 'tweet' and 'Time' to 'time'
+                # Convert keys like 'Tweet' to 'tweet' and 'Time' to 'time' for consistency
                 normalized_key = key.lower()
                 normalized_tweet[normalized_key] = value
             normalized_data.append(normalized_tweet)
