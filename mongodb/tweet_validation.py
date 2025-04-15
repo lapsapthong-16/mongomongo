@@ -1,3 +1,5 @@
+# Author: Edwina Hon Kai Xin
+
 # Class to validate tweets
 class TweetValidator:
     def __init__(self, required_fields=None, allowed_sentiments=None):
@@ -25,7 +27,6 @@ class TweetValidator:
         if not isinstance(tweet.get("name"), str):
             print(f"'name' is not a string: {tweet.get('name')}")
             return False
-        # if not isinstance(tweet.get("prediction"), (int, float)):
         if not isinstance(tweet.get("prediction"), str):
             print(f"'prediction' is not a number: {tweet.get('prediction')}")
             return False

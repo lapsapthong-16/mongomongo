@@ -1,3 +1,4 @@
+# Author: Edwina Hon Kai Xin
 from transformers import pipeline
 
 class EntityExtractor:

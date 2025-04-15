@@ -41,11 +41,11 @@ class sentiment_query:
         start_dt = datetime.strptime(start_date, "%Y-%m-%d")
         end_dt = datetime.strptime(end_date, "%Y-%m-%d")
 
-        # Fetch tweets where time exists
+        # Fetch tweets where time feature exists
         result = []
         for doc in self.tweets.find({"time": {"$exists": True}}):
             try:
-                tweet_time = doc["time"]  # already a datetime object
+                tweet_time = doc["time"]  
                 if start_dt <= tweet_time <= end_dt:
                     result.append(doc)
             except Exception as e:
