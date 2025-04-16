@@ -6,9 +6,9 @@ from pyspark.sql.functions import udf, col
 from pyspark.sql.types import StringType, ArrayType
 import re
 
-class TextCleaner(Transformer, DefaultParamsReadable, DefaultParamsWritable):
+class text_cleaner(Transformer, DefaultParamsReadable, DefaultParamsWritable):
     def __init__(self, inputCol="Tweet", outputCol="clean_text"):
-        super(TextCleaner, self).__init__()
+        super(text_cleaner, self).__init__()
         self.inputCol = inputCol
         self.outputCol = outputCol
 

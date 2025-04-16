@@ -3,7 +3,7 @@
 #------------------------
 from pyspark.sql.functions import col
 from pyspark.sql.utils import StreamingQueryException
-from preprocess.TextPreprocessor import TextPreprocessor  # Import custom text preprocessing class from Task 2
+from sentimentml.TextPreprocessor import TextPreprocessor  # Import custom text preprocessing class from Task 2
 import logging
 
 # Set up logger for tracking and debugging

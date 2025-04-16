@@ -8,9 +8,9 @@ from pyspark.sql.types import ArrayType, StringType
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 
-class MalayStemmer(Transformer, DefaultParamsReadable, DefaultParamsWritable):
+class malay_word_stemmer(Transformer, DefaultParamsReadable, DefaultParamsWritable):
     def __init__(self, inputCol="lemmatized_words", outputCol="stemmed_words"):
-        super(MalayStemmer, self).__init__()
+        super(malay_word_stemmer, self).__init__()
         self.inputCol = inputCol
         self.outputCol = outputCol
 

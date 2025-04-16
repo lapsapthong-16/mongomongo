@@ -9,9 +9,9 @@ from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag
 from nltk.corpus import wordnet
 
-class Lemmatizer(Transformer, DefaultParamsReadable, DefaultParamsWritable):
+class lemmatizer(Transformer, DefaultParamsReadable, DefaultParamsWritable):
     def __init__(self, inputCol="words", outputCol="lemmatized_words"):
-        super(Lemmatizer, self).__init__()
+        super(lemmatizer, self).__init__()
         self.inputCol = inputCol
         self.outputCol = outputCol
         self.lemmatizer_udf = udf(self.nltk_lemmatizer, ArrayType(StringType()))
@@ -27,7 +27,7 @@ class Lemmatizer(Transformer, DefaultParamsReadable, DefaultParamsWritable):
     def nltk_lemmatizer(words):
         # Lemmatize words using WordNetLemmatizer.
         lemmatizer = WordNetLemmatizer()
-        return [lemmatizer.lemmatize(word, Lemmatizer.get_wordnet_pos(word)) for word in words]
+        return [lemmatizer.lemmatize(word, lemmatizer.get_wordnet_pos(word)) for word in words]
 
     def _transform(self, df):
         return df.withColumn(self.outputCol, self.lemmatizer_udf(col(self.inputCol)))
