@@ -15,11 +15,6 @@ class data_loader:
         return data_list
 
     @staticmethod
-    def from_parquet(file_path):
-        import pandas as pd
-        return pd.read_parquet(file_path).to_dict("records")
-
-    @staticmethod
     def preview_json_lines(file_path, limit=5):
         import json
         from pprint import pprint

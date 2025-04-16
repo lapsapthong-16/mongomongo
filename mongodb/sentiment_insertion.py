@@ -28,7 +28,6 @@ class sentiment_insertion:
     
     @staticmethod
     def normalize_field_names(data):
-        """Convert field names to lowercase"""
         normalized_data = []
         for tweet in data:
             normalized_tweet = {}
@@ -41,7 +40,6 @@ class sentiment_insertion:
     
     @staticmethod
     def extract_users(data):
-        """Extract unique users from the data"""
         users = {}
         for tweet in data:
             user_id = tweet.get("user_id")
@@ -50,13 +48,12 @@ class sentiment_insertion:
                     "user_id": user_id,
                     "name": tweet.get("name", ""),
                     "followers_count": tweet.get("followers_count", 0),
-                    "location": tweet.get("location", "")  # Now using lowercase 'location'
+                    "location": tweet.get("location", "") 
                 }
         return list(users.values())
     
     @staticmethod
     def remove_user_fields(data):
-        """Remove user fields from tweets"""
         modified_tweets = []
         for tweet in data:
             tweet_copy = tweet.copy()
