@@ -1,0 +1,1 @@
+{"class":"org.apache.spark.ml.Pipeline","timestamp":1744391018626,"sparkVersion":"3.5.1","uid":"Pipeline_d0cfed3fdc9d","paramMap":{"stageUids":["DecisionTreeClassifier_67857d2773e4"]},"defaultParamMap":{}}
