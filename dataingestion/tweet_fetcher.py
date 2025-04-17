@@ -22,7 +22,7 @@ def fetch_tweets(user_ids=None, count_per_user=50, output_file='tweets_output.cs
         user_ids = ["22594051", "55186601", "18040230", "61083422", "102098902", "145550026"]
     
     if api_key is None:
-        api_key = "a5b5a0340fmshc2902e9a96fe36cp18bef4jsnba70e7dad432"
+        api_key = "9696f35cd0msh4a07aee7562146dp1d6a82jsnb04a0cc2e2d8"
     
     url = "https://twitter241.p.rapidapi.com/user-tweets"
     headers = {
@@ -36,8 +36,8 @@ def fetch_tweets(user_ids=None, count_per_user=50, output_file='tweets_output.cs
     # Open a CSV file to write the output
     with open(output_file, mode='w', newline='', encoding='utf-8') as csvfile:
         csvwriter = csv.writer(csvfile)
-        # Write the header
-        csvwriter.writerow(['User ID', 'Name', 'Followers Count', 'Tweet'])
+        # Write the header with the additional columns
+        csvwriter.writerow(['User ID', 'Name', 'Followers Count', 'Tweet', 'Location', 'Time', 'Friends Count'])
         
         for user_id in user_ids:
             # We'll potentially make multiple requests with pagination to get more tweets
@@ -79,9 +79,18 @@ def fetch_tweets(user_ids=None, count_per_user=50, output_file='tweets_output.cs
                                     continue
                                     
                                 tweet_result = entry.get("content", {}).get("itemContent", {}).get("tweet_results", {}).get("result", {})
-                                full_text = tweet_result.get("legacy", {}).get("full_text", "")
-                                user_name = tweet_result.get("core", {}).get("user_results", {}).get("result", {}).get("legacy", {}).get("name", "")
-                                followers_count = tweet_result.get("core", {}).get("user_results", {}).get("result", {}).get("legacy", {}).get("followers_count", 0)
+                                user_legacy = tweet_result.get("core", {}).get("user_results", {}).get("result", {}).get("legacy", {})
+                                tweet_legacy = tweet_result.get("legacy", {})
+                                
+                                # Extract the original user data
+                                full_text = tweet_legacy.get("full_text", "")
+                                user_name = user_legacy.get("name", "")
+                                followers_count = user_legacy.get("followers_count", 0)
+                                
+                                # Extract the additional requested data
+                                location = user_legacy.get("location", "")
+                                created_at = tweet_legacy.get("created_at", "")
+                                friends_count = user_legacy.get("friends_count", 0)
                                 
                                 # Limit followers count to 10 digits
                                 if followers_count > 9999999999:
@@ -92,8 +101,8 @@ def fetch_tweets(user_ids=None, count_per_user=50, output_file='tweets_output.cs
                                     full_text = re.sub(r'http\S+', '', full_text).strip()
                                     # Append the full_text to the list
                                     full_texts_for_user.append(full_text)
-                                    # Write to CSV
-                                    csvwriter.writerow([user_id, user_name, followers_count, full_text])
+                                    # Write to CSV with the additional columns
+                                    csvwriter.writerow([user_id, user_name, followers_count, full_text, location, created_at, friends_count])
                                     batch_tweets += 1
                                     # Break if we've reached our limit
                                     if len(full_texts_for_user) >= count_per_user:
@@ -126,4 +135,5 @@ def fetch_tweets(user_ids=None, count_per_user=50, output_file='tweets_output.cs
     print(f"Total tweets fetched: {total_tweets_fetched}")
     
     return all_tweets_by_user
+
 
