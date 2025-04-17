@@ -1,3 +1,6 @@
+#------------------------
+# Author: Tan Zhi Wei
+#------------------------
 import requests  # For making HTTP requests
 import csv       # For writing data to CSV
 import re        # For regular expression to remove URLs
