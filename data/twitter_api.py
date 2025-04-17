@@ -1,17 +1,10 @@
 #------------------------
 # Author: Tan Zhi Wei
 #------------------------
+import requests
 
-import requests  # Add this import statement
-
-url = "https://twitter241.p.rapidapi.com/user"
-
-def get_user_input():
-    return input("Enter the username: ")
-
-def main():
-    # Get user input
-    username = get_user_input()
+def get_user_data(username):
+    url = "https://twitter241.p.rapidapi.com/user"
 
     # Set the querystring with the user input
     querystring = {"username": username}
@@ -34,11 +27,9 @@ def main():
         username = user_data.get("legacy", {}).get("screen_name", "")
         rest_id = user_data.get("rest_id", "")
         
-        # Print the extracted username and rest_id
-        print(f"Username: {username}, Rest ID: {rest_id}")
+        # Return the extracted username and rest_id
+        return username, rest_id
     else:
         print(f"Error: {response.status_code}")
         print(response.text)
-
-if __name__ == "__main__":
-    main()
+        return None, None
