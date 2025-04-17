@@ -11,7 +11,7 @@ def get_user_data(username):
     print(f"Querystring set to: {querystring}")
 
     headers = {
-        "x-rapidapi-key": "a5b5a0340fmshc2902e9a96fe36cp18bef4jsnba70e7dad432",
+        "x-rapidapi-key": "9696f35cd0msh4a07aee7562146dp1d6a82jsnb04a0cc2e2d8",
         "x-rapidapi-host": "twitter241.p.rapidapi.com"
     }
 
