@@ -1,3 +1,6 @@
+#------------------------
+# Author: Tan Zhi Wei
+#------------------------
 import pandas as pd
 from kafka import KafkaProducer
 import json
