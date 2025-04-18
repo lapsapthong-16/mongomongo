@@ -127,7 +127,7 @@ def fetch_tweets(user_ids=None, count_per_user=50, output_file='tweets_output.cs
             
             print(f"Fetched {len(full_texts_for_user)} tweets for user {user_id}")
 
-    # Check if we have data for all users
+    # Checka if we have data for all users
     if len(all_tweets_by_user) == len(user_ids):
         print("\nSuccessfully fetched data for all users!")
     else:
