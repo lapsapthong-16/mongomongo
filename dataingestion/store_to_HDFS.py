@@ -57,14 +57,14 @@ def consume_tweets_to_hdfs(topic='MalaysiaNewsTopic', bootstrap_servers=['localh
                     
                     # Ensure all 8 features are included from tweets_output_with_sentiment.csv
                     tweet_json = {
-                        'user_id': tweet_data.get('user_id', ''),
-                        'name': tweet_data.get('name', ''),
-                        'followers_count': tweet_data.get('followers_count', 0),
-                        'tweet_text': tweet_data.get('tweet_text', ''),
-                        'location': tweet_data.get('location', ''),
-                        'created_at': tweet_data.get('created_at', ''),
-                        'friends_count': tweet_data.get('friends_count', 0),
-                        'sentiment': tweet_data.get('sentiment', 'Unknown')
+                        'User ID': tweet_data.get('user_id', ''),
+                        'Name': tweet_data.get('name', ''),
+                        'Followers Count': tweet_data.get('followers_count', 0),
+                        'Tweet': tweet_data.get('tweet_text', ''),
+                        'Location': tweet_data.get('location', ''),
+                        'Tweet Time': tweet_data.get('created_at', ''),
+                        'Friends Count': tweet_data.get('friends_count', 0),
+                        'Sentiment': tweet_data.get('sentiment', 'Unknown')
                     }
                     
                     # Add comma between tweets (not before the first one)
