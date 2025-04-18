@@ -17,7 +17,7 @@ def get_user_data(username):
 
     response = requests.get(url, headers=headers, params=querystring)
 
-    # Check if the request was successful
+    # Check if the request wass successful
     if response.status_code == 200:
         # Parse the JSON response
         data = response.json()
