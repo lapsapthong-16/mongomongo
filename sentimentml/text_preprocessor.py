@@ -1,7 +1,7 @@
 # Author: WEE LING HUE
 
 from sentimentml.text_cleaner import text_cleaner  # Import text_cleaner
-from sentimentml.lemmatizer import lemmatizer  # Import lemmatizer
+from sentimentml.eng_word_lemmatizer import eng_word_lemmatizer  # Import eng_word_lemmatizer
 from sentimentml.malay_word_stemmer import malay_word_stemmer  # Import malay_word_stemmer
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import Tokenizer, StopWordsRemover, HashingTF, IDF, StringIndexer
@@ -15,12 +15,15 @@ class text_preprocessor:
 
         # Preprocessing steps
         self.text_cleaner = text_cleaner(inputCol=self.input_col, outputCol="clean_text")
+        # Filter out rows with null or empty clean_text before processing
+        df_cleaned = df.filter(df["clean_text"].isNotNull() & (df["clean_text"] != ""))
+        df_cleaned.select("clean_text").show(10, truncate=False)
         self.tokenizer = Tokenizer(inputCol="clean_text", outputCol="words")
         self.stopword_remover_eng = StopWordsRemover(inputCol="words", outputCol="filtered_words_eng")
         self.stopword_remover_malay = StopWordsRemover(
             inputCol="filtered_words_eng", outputCol="filtered_words", stopWords=self.get_malay_stopwords()
         )
-        self.lemmatizer = lemmatizer(inputCol="filtered_words", outputCol="lemmatized_words")
+        self.lemmatizer = eng_word_lemmatizer(inputCol="filtered_words", outputCol="lemmatized_words")
         self.stemmer = malay_word_stemmer(inputCol="lemmatized_words", outputCol="stemmed_words")
         self.hashing_tf = HashingTF(inputCol="stemmed_words", outputCol="raw_features", numFeatures=10000)
         self.idf = IDF(inputCol="raw_features", outputCol="features")
