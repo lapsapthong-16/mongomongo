@@ -79,6 +79,6 @@ def analyze_tweet_sentiment(input_csv_path, output_csv_path=None):
     
     return df
 
-# Your main function can call it like this:
+# Yours main function can call it like this:
 # if __name__ == "__main__":
 #     analyzed_data = analyze_tweet_sentiment('tweets_output.csv')
